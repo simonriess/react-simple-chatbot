@@ -264,17 +264,16 @@ class ChatBot extends Component {
       this.handleEnd();
     } else if (data && data.undoUntil) {
       while (currentStep.id !== data.undoUntil) {
-        console.log(currentStep.id);
         let renderedStep = renderedSteps.pop();
         console.log(renderedStep);
         currentStep = previousSteps.pop();
         console.log(currentStep);
-        this.setState({
-          currentStep,
-          renderedSteps,
-          previousSteps
-        });
       }
+      this.setState({
+        currentStep,
+        renderedSteps,
+        previousSteps
+      });
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
       const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
