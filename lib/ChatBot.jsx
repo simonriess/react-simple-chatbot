@@ -272,6 +272,7 @@ class ChatBot extends Component {
           renderedSteps,
           previousSteps
         });
+        renderedSteps.push(currentStep);
       }
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
