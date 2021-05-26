@@ -243,7 +243,7 @@ class ChatBot extends Component {
     return steps;
   };
 
-  triggerNextStep = data => {
+  triggerNextStep = async data => {
     const { enableMobileAutoFocus } = this.props;
     const { defaultUserSettings, previousSteps, renderedSteps, steps } = this.state;
 
@@ -272,13 +272,13 @@ class ChatBot extends Component {
         console.log(renderedStep);
         currentStep = previousSteps.pop();
         console.log(currentStep);
-        Sleep(500);
+        await Sleep(500);
         this.setState({
           currentStep,
           renderedSteps,
           previousSteps
         });
-        Sleep(250);
+        await Sleep(250);
       }
 
       let nextStep = Object.assign({}, steps[data.undoUntil]);
