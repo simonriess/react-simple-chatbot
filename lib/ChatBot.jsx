@@ -278,7 +278,6 @@ class ChatBot extends Component {
           renderedSteps,
           previousSteps
         });
-        await Sleep(250);
       }
 
       let nextStep = Object.assign({}, steps[data.undoUntil]);
