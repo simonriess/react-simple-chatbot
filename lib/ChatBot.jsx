@@ -21,6 +21,10 @@ import { ChatIcon, CloseIcon, SubmitIcon, MicIcon } from './icons';
 import { isMobile } from './utils';
 import { speakFn } from './speechSynthesis';
 
+function Sleep(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 class ChatBot extends Component {
   /* istanbul ignore next */
   constructor(props) {
@@ -268,11 +272,52 @@ class ChatBot extends Component {
         console.log(renderedStep);
         currentStep = previousSteps.pop();
         console.log(currentStep);
+        Sleep(500);
+        this.setState({
+          currentStep,
+          renderedSteps,
+          previousSteps
+        });
+        Sleep(250);
       }
-      this.setState({
-        currentStep,
-        renderedSteps,
-        previousSteps
+
+      let nextStep = Object.assign({}, steps[data.undoUntil]);
+
+      if (nextStep.message) {
+        nextStep.message = this.getStepMessage(nextStep.message);
+      } else if (nextStep.update) {
+        const updateStep = nextStep;
+        nextStep = Object.assign({}, steps[updateStep.update]);
+
+        if (nextStep.options) {
+          for (let i = 0, len = nextStep.options.length; i < len; i += 1) {
+            nextStep.options[i].trigger = updateStep.trigger;
+          }
+        } else {
+          nextStep.trigger = updateStep.trigger;
+        }
+      }
+
+      nextStep.key = Random(24);
+
+      previousStep = currentStep;
+      currentStep = nextStep;
+
+      this.setState({ renderedSteps, currentStep, previousStep }, () => {
+        if (nextStep.user) {
+          this.setState({ disabled: false }, () => {
+            if (enableMobileAutoFocus || !isMobile()) {
+              if (this.input) {
+                this.input.focus();
+              }
+            }
+          });
+        } else {
+          renderedSteps.push(nextStep);
+          previousSteps.push(nextStep);
+
+          this.setState({ renderedSteps, previousSteps });
+        }
       });
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
