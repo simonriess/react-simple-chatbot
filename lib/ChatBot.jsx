@@ -267,19 +267,13 @@ class ChatBot extends Component {
         console.log(currentStep.id);
         renderedSteps.pop();
         currentStep = previousSteps.pop();
+        console.log(currentStep);
         this.setState({
           currentStep,
           renderedSteps,
           previousSteps
         });
       }
-      renderedSteps.push(currentStep);
-      previousSteps.push(currentStep);
-      this.setState({
-        currentStep,
-        renderedSteps,
-        previousSteps
-      });
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
       const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
