@@ -264,6 +264,7 @@ class ChatBot extends Component {
       this.handleEnd();
     } else if (data && data.undoUntil) {
       while (currentStep.id !== data.undoUntil) {
+        console.log(currentStep.id);
         renderedSteps.pop();
         currentStep = previousSteps.pop();
         this.setState({
