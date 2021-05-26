@@ -257,14 +257,19 @@ class ChatBot extends Component {
         }
         if (data && data.trigger) {
             currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
-            delete currentStep.options;
         }
 
         if (isEnd) {
             this.handleEnd();
         } else if (currentStep.options && data) {
-            const option = currentStep.options.filter(o => o.value === data.value)[0];
-            const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
+            let trigger;
+            if (data && data.trigger) {
+                trigger = currentStep.trigger;
+            }
+            else{
+                const option = currentStep.options.filter(o => o.value === data.value)[0];
+                trigger = this.getTriggeredStep(option.trigger, currentStep.value);
+            }
             delete currentStep.options;
 
             // replace choose option for user message
