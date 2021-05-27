@@ -261,7 +261,6 @@ class ChatBot extends Component {
     }
     if (data && data.trigger) {
       currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
-      delete currentStep.options;
     }
 
     if (isEnd) {
