@@ -247,6 +247,22 @@ class ChatBot extends Component {
     const { enableMobileAutoFocus } = this.props;
     const { defaultUserSettings, previousSteps, renderedSteps, steps } = this.state;
 
+    let { currentStep, previousStep } = this.state;
+    const isEnd = currentStep.end;
+
+    if (data && typeof data.value !== 'undefined') {
+      currentStep.value = data.value;
+    }
+    if (data && data.hideInput) {
+      currentStep.hideInput = data.hideInput;
+    }
+    if (data && data.hideExtraControl) {
+      currentStep.hideExtraControl = data.hideExtraControl;
+    }
+    if (data && data.trigger) {
+      currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
+    }
+
     function goToNextStep(stepID) {
       let nextStep = Object.assign({}, steps[stepID]);
 
@@ -286,22 +302,6 @@ class ChatBot extends Component {
           this.setState({ renderedSteps, previousSteps });
         }
       });
-    }
-
-    let { currentStep, previousStep } = this.state;
-    const isEnd = currentStep.end;
-
-    if (data && typeof data.value !== 'undefined') {
-      currentStep.value = data.value;
-    }
-    if (data && data.hideInput) {
-      currentStep.hideInput = data.hideInput;
-    }
-    if (data && data.hideExtraControl) {
-      currentStep.hideExtraControl = data.hideExtraControl;
-    }
-    if (data && data.trigger) {
-      currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
     }
 
     if (isEnd) {
