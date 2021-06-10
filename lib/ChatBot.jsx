@@ -247,39 +247,8 @@ class ChatBot extends Component {
     const { enableMobileAutoFocus } = this.props;
     const { defaultUserSettings, previousSteps, renderedSteps, steps } = this.state;
 
-    let { currentStep, previousStep } = this.state;
-    const isEnd = currentStep.end;
-
-    if (data && typeof data.value !== 'undefined') {
-      currentStep.value = data.value;
-    }
-    if (data && data.hideInput) {
-      currentStep.hideInput = data.hideInput;
-    }
-    if (data && data.hideExtraControl) {
-      currentStep.hideExtraControl = data.hideExtraControl;
-    }
-    if (data && data.trigger) {
-      currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
-    }
-
-    if (isEnd) {
-      this.handleEnd();
-    } else if (data && data.undoUntil) {
-      while (currentStep.id !== data.undoUntil) {
-        let renderedStep = renderedSteps.pop();
-        console.log(renderedStep);
-        currentStep = previousSteps.pop();
-        console.log(currentStep);
-        await Sleep(500);
-        this.setState({
-          currentStep,
-          renderedSteps,
-          previousSteps
-        });
-      }
-
-      let nextStep = Object.assign({}, steps[data.undoUntil]);
+    function goToNextStep(stepID) {
+      let nextStep = Object.assign({}, steps[stepID]);
 
       if (nextStep.message) {
         nextStep.message = this.getStepMessage(nextStep.message);
@@ -317,6 +286,43 @@ class ChatBot extends Component {
           this.setState({ renderedSteps, previousSteps });
         }
       });
+    }
+
+    let { currentStep, previousStep } = this.state;
+    const isEnd = currentStep.end;
+
+    if (data && typeof data.value !== 'undefined') {
+      currentStep.value = data.value;
+    }
+    if (data && data.hideInput) {
+      currentStep.hideInput = data.hideInput;
+    }
+    if (data && data.hideExtraControl) {
+      currentStep.hideExtraControl = data.hideExtraControl;
+    }
+    if (data && data.trigger) {
+      currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
+    }
+
+    if (isEnd) {
+      this.handleEnd();
+    } else if (data && data.undoUntil) {
+      while (currentStep.id !== data.undoUntil) {
+        let renderedStep = renderedSteps.pop();
+        console.log(renderedStep);
+        currentStep = previousSteps.pop();
+        console.log(currentStep);
+        await Sleep(500);
+        this.setState({
+          currentStep,
+          renderedSteps,
+          previousSteps
+        });
+      }
+
+      goToNextStep(data.undoUntil);
+    } else if (currentStep.options && data.skipTo) {
+      goToNextStep(data.skipTo);
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
       const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
