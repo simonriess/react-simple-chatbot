@@ -321,7 +321,7 @@ class ChatBot extends Component {
       }
 
       goToNextStep(this, data.undoUntil);
-    } else if (currentStep.options && data.skipTo) {
+    } else if (data && data.skipTo) {
       goToNextStep(this, data.skipTo);
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
