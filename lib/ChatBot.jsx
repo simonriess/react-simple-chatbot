@@ -263,11 +263,11 @@ class ChatBot extends Component {
       currentStep.trigger = this.getTriggeredStep(data.trigger, data.value);
     }
 
-    function goToNextStep(stepID) {
+    function goToNextStep(chatbot, stepID) {
       let nextStep = Object.assign({}, steps[stepID]);
 
       if (nextStep.message) {
-        nextStep.message = this.getStepMessage(nextStep.message);
+        nextStep.message = chatbot.getStepMessage(nextStep.message);
       } else if (nextStep.update) {
         const updateStep = nextStep;
         nextStep = Object.assign({}, steps[updateStep.update]);
@@ -286,12 +286,12 @@ class ChatBot extends Component {
       previousStep = currentStep;
       currentStep = nextStep;
 
-      this.setState({ renderedSteps, currentStep, previousStep }, () => {
+      chatbot.setState({ renderedSteps, currentStep, previousStep }, () => {
         if (nextStep.user) {
-          this.setState({ disabled: false }, () => {
+          chatbot.setState({ disabled: false }, () => {
             if (enableMobileAutoFocus || !isMobile()) {
-              if (this.input) {
-                this.input.focus();
+              if (chatbot.input) {
+                chatbot.input.focus();
               }
             }
           });
@@ -299,7 +299,7 @@ class ChatBot extends Component {
           renderedSteps.push(nextStep);
           previousSteps.push(nextStep);
 
-          this.setState({ renderedSteps, previousSteps });
+          chatbot.setState({ renderedSteps, previousSteps });
         }
       });
     }
@@ -320,9 +320,9 @@ class ChatBot extends Component {
         });
       }
 
-      goToNextStep(data.undoUntil);
+      goToNextStep(this, data.undoUntil);
     } else if (currentStep.options && data.skipTo) {
-      goToNextStep(data.skipTo);
+      goToNextStep(this, data.skipTo);
     } else if (currentStep.options && data) {
       const option = currentStep.options.filter(o => o.value === data.value)[0];
       const trigger = this.getTriggeredStep(option.trigger, currentStep.value);
