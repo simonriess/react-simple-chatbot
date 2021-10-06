@@ -142,6 +142,7 @@ class ChatBot extends Component {
           if (enableMobileAutoFocus || !isMobile()) {
             if (this.input) {
               this.input.focus();
+              this.input.click();
             }
           }
         });
@@ -292,6 +293,7 @@ class ChatBot extends Component {
             if (enableMobileAutoFocus || !isMobile()) {
               if (chatbot.input) {
                 chatbot.input.focus();
+                chatbot.input.click();
               }
             }
           });
@@ -379,6 +381,7 @@ class ChatBot extends Component {
             if (enableMobileAutoFocus || !isMobile()) {
               if (this.input) {
                 this.input.focus();
+                this.input.click();
               }
             }
           });
@@ -563,6 +566,7 @@ class ChatBot extends Component {
                 if (enableMobileAutoFocus || !isMobile()) {
                   if (this.input) {
                     this.input.focus();
+                    this.input.click();
                   }
                 }
               }
