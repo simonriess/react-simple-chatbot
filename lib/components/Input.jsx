@@ -34,6 +34,8 @@ import styled, { css } from 'styled-components';
 //   }
 // `;
 
-const Input = <textarea />;
+const Input = function() {
+  return <textarea />;
+};
 
 export default Input;
