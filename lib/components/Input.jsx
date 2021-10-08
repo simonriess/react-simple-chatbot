@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import { invalidInput } from '../common/animations';
 import styled, { css } from 'styled-components';
 
