@@ -144,7 +144,6 @@ class ChatBot extends Component {
               this.input.focus();
               this.input.click();
               this.input.setAttribute('autofocus', '');
-              this.input.setAttribute('type', 'text');
               this.input.setAttribute('inputmode', 'search');
             }
           }
@@ -298,7 +297,6 @@ class ChatBot extends Component {
                 chatbot.input.focus();
                 chatbot.input.click();
                 this.input.setAttribute('autofocus', '');
-                this.input.setAttribute('type', 'text');
                 this.input.setAttribute('inputmode', 'search');
               }
             }
@@ -389,7 +387,6 @@ class ChatBot extends Component {
                 this.input.focus();
                 this.input.click();
                 this.input.setAttribute('autofocus', '');
-                this.input.setAttribute('type', 'text');
                 this.input.setAttribute('inputmode', 'search');
               }
             }
@@ -577,7 +574,6 @@ class ChatBot extends Component {
                     this.input.focus();
                     this.input.click();
                     this.input.setAttribute('autofocus', '');
-                    this.input.setAttribute('type', 'text');
                     this.input.setAttribute('inputmode', 'search');
                   }
                 }
