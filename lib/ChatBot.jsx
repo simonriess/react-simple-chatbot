@@ -25,6 +25,32 @@ function Sleep(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
+function focusInput(targetInput) {
+  // create invisible dummy input to receive the focus first
+  const fakeInput = document.createElement('input');
+  fakeInput.setAttribute('type', 'text');
+  fakeInput.style.position = 'absolute';
+  fakeInput.style.opacity = 0;
+  fakeInput.style.height = 0;
+  fakeInput.style.fontSize = '16px'; // disable auto zoom
+
+  // you may need to append to another element depending on the browser's auto
+  // zoom/scroll behavior
+  document.body.prepend(fakeInput);
+
+  // focus so that subsequent async focus will work
+  fakeInput.focus();
+
+  setTimeout(() => {
+    // now we can focus on the target input
+    targetInput.focus();
+    targetInput.click();
+
+    // cleanup
+    fakeInput.remove();
+  }, 1000);
+}
+
 class ChatBot extends Component {
   /* istanbul ignore next */
   constructor(props) {
@@ -244,32 +270,6 @@ class ChatBot extends Component {
     return steps;
   };
 
-  focusInput(targetInput) {
-    // create invisible dummy input to receive the focus first
-    const fakeInput = document.createElement('input');
-    fakeInput.setAttribute('type', 'text');
-    fakeInput.style.position = 'absolute';
-    fakeInput.style.opacity = 0;
-    fakeInput.style.height = 0;
-    fakeInput.style.fontSize = '16px'; // disable auto zoom
-
-    // you may need to append to another element depending on the browser's auto
-    // zoom/scroll behavior
-    document.body.prepend(fakeInput);
-
-    // focus so that subsequent async focus will work
-    fakeInput.focus();
-
-    setTimeout(() => {
-      // now we can focus on the target input
-      targetInput.focus();
-      targetInput.click();
-
-      // cleanup
-      fakeInput.remove();
-    }, 1000);
-  }
-
   triggerNextStep = async data => {
     const { enableMobileAutoFocus } = this.props;
     const { defaultUserSettings, previousSteps, renderedSteps, steps } = this.state;
@@ -318,7 +318,7 @@ class ChatBot extends Component {
           chatbot.setState({ disabled: false }, () => {
             if (enableMobileAutoFocus || !isMobile()) {
               if (chatbot.input) {
-                this.focusInput(chatbot.input);
+                focusInput(chatbot.input);
                 // chatbot.input.focus();
                 // chatbot.input.click();
               }
@@ -407,7 +407,7 @@ class ChatBot extends Component {
           this.setState({ disabled: false }, () => {
             if (enableMobileAutoFocus || !isMobile()) {
               if (this.input) {
-                this.focusInput(this.input);
+                focusInput(this.input);
                 // this.input.focus();
                 // this.input.click();
               }
@@ -593,7 +593,7 @@ class ChatBot extends Component {
               () => {
                 if (enableMobileAutoFocus || !isMobile()) {
                   if (this.input) {
-                    this.focusInput(this.input);
+                    focusInput(this.input);
                     // this.input.focus();
                     // this.input.click();
                   }
