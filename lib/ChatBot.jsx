@@ -41,6 +41,10 @@ function focusInput(targetInput) {
   // focus so that subsequent async focus will work
   fakeInput.focus();
 
+  targetInput.setAttribute('autofocus', '');
+  targetInput.setAttribute('type', 'text');
+  targetInput.setAttribute('inputmode', 'search');
+
   setTimeout(() => {
     // now we can focus on the target input
     targetInput.focus();
