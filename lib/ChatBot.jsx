@@ -781,7 +781,7 @@ class ChatBot extends Component {
             {!currentStep.hideInput && (
               <Input
                 type="text"
-                autofocus={true}
+                autofocus
                 style={inputStyle}
                 ref={this.setInputRef}
                 className="rsc-input"
