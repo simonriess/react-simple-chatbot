@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { invalidInput } from '../common/animations';
 import styled, { css } from 'styled-components';
 
-const Input = styled.input.attrs({ type: 'text', autofocus: true, inputmode: 'search' })`
+const Input = styled.input.attrs({})`
   animation: ${props =>
     props.invalid
       ? css`
