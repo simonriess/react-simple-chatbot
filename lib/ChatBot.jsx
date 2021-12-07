@@ -25,6 +25,18 @@ function Sleep(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
+function isInIframe() {
+  return window.frameElement !== null;
+}
+
+function scrollBackground() {
+  if (isInIframe()) {
+    window.parent.scrollTo(0, 0);
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
 function focusInput(targetInput) {
   // create invisible dummy input to receive the focus first
   const fakeInput = document.createElement('input');
@@ -41,6 +53,7 @@ function focusInput(targetInput) {
   // focus so that subsequent async focus will work
   //   fakeInput.focus();
   targetInput.focus();
+  scrollBackground();
   //   targetInput.click();
 
   setTimeout(() => {
