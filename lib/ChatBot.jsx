@@ -72,6 +72,8 @@ class ChatBot extends Component {
       this.input = element;
       if (element !== null) {
         this.input.setAttribute('autofocus', '');
+        this.input.setAttribute('autocomplete', 'off');
+        this.input.setAttribute('autocorrect', 'off');
       }
     };
 
