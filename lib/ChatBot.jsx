@@ -171,7 +171,7 @@ class ChatBot extends Component {
         // focus input if last step cached is a user step
         this.setState({ disabled: false }, () => {
           if (enableMobileAutoFocus || !isMobile()) {
-            if (this.input) {
+            if (!this.state.disabled && this.input) {
               this.input.focus();
               this.input.click();
             }
