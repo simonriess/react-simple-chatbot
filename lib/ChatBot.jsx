@@ -39,18 +39,19 @@ function focusInput(targetInput) {
   document.body.prepend(fakeInput);
 
   // focus so that subsequent async focus will work
-  //   fakeInput.focus();
+  fakeInput.focus();
   //   targetInput.focus();
   //   targetInput.click();
 
   setTimeout(() => {
     // now we can focus on the target input
-    // targetInput.focus();
-    // targetInput.click();
+    targetInput.setAttribute('autofocus', 'autofocus');
+    targetInput.focus();
+    targetInput.click();
 
     // cleanup
     fakeInput.remove();
-  }, 1000);
+  }, 100);
 }
 
 class ChatBot extends Component {
