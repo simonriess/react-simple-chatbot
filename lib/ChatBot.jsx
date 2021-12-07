@@ -69,8 +69,7 @@ class ChatBot extends Component {
 
     this.setInputRef = element => {
       this.input = element;
-      this.input.setAttribute('autofocus', '');
-      this.input.setAttribute('inputmode', 'search');
+      this.input.setAttribute('autofocus', 'true');
     };
 
     this.state = {
@@ -785,7 +784,6 @@ class ChatBot extends Component {
             {!currentStep.hideInput && (
               <Input
                 type="textarea"
-                autofocus
                 style={inputStyle}
                 ref={this.setInputRef}
                 className="rsc-input"

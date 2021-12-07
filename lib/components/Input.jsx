@@ -4,8 +4,7 @@ import styled, { css } from 'styled-components';
 
 const Input = styled.input.attrs(props => ({
   autofocus: true,
-  autofocus: true,
-  inputmode: 'search'
+  autoFocus: true
 }))`
   animation: ${props =>
     props.invalid
