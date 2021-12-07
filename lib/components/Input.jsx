@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 
 const Input = styled.input.attrs(props => ({
   autofocus: true,
-  type: 'text',
   autofocus: true,
   inputmode: 'search'
 }))`

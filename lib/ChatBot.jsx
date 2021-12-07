@@ -70,7 +70,6 @@ class ChatBot extends Component {
     this.setInputRef = element => {
       this.input = element;
       this.input.setAttribute('autofocus', '');
-      this.input.setAttribute('type', 'text');
       this.input.setAttribute('inputmode', 'search');
     };
 
@@ -785,7 +784,7 @@ class ChatBot extends Component {
           <Footer className="rsc-footer" style={footerStyle}>
             {!currentStep.hideInput && (
               <Input
-                type="text"
+                type="textarea"
                 autofocus
                 style={inputStyle}
                 ref={this.setInputRef}
