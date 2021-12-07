@@ -69,7 +69,7 @@ class ChatBot extends Component {
 
     this.setInputRef = element => {
       this.input = element;
-      this.input.setAttribute('autofocus', true);
+      //   this.input.setAttribute('autofocus', true);
     };
 
     this.state = {
