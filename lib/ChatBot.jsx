@@ -40,6 +40,8 @@ function focusInput(targetInput) {
 
   // focus so that subsequent async focus will work
   //   fakeInput.focus();
+  targetInput.focus();
+  targetInput.click();
 
   setTimeout(() => {
     // now we can focus on the target input
