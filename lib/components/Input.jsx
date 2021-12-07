@@ -3,7 +3,10 @@ import { invalidInput } from '../common/animations';
 import styled, { css } from 'styled-components';
 
 const Input = styled.input.attrs(props => ({
-  autofocus: true
+  autofocus: true,
+  type: 'text',
+  autofocus: true,
+  inputmode: 'search'
 }))`
   animation: ${props =>
     props.invalid
