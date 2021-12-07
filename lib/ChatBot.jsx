@@ -568,7 +568,7 @@ class ChatBot extends Component {
         },
         () => {
           if (this.input) {
-            this.input.blur();
+            // this.input.blur();
           }
         }
       );
@@ -784,7 +784,7 @@ class ChatBot extends Component {
             {renderedSteps.map(this.renderStep)}
           </Content>
           <Footer className="rsc-footer" style={footerStyle}>
-            {!currentStep.hideInput && !disabled && (
+            {!currentStep.hideInput && (
               <Input
                 type="textarea"
                 style={inputStyle}
