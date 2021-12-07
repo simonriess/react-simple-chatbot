@@ -39,15 +39,15 @@ function focusInput(targetInput) {
   document.body.prepend(fakeInput);
 
   // focus so that subsequent async focus will work
-  fakeInput.focus();
-  //   targetInput.focus();
+  //   fakeInput.focus();
+  targetInput.focus();
   //   targetInput.click();
 
   setTimeout(() => {
     // now we can focus on the target input
-    targetInput.setAttribute('autofocus', 'autofocus');
-    targetInput.focus();
-    targetInput.click();
+    // targetInput.setAttribute('autofocus', 'autofocus');
+    // targetInput.focus();
+    // targetInput.click();
 
     // cleanup
     fakeInput.remove();
@@ -784,7 +784,7 @@ class ChatBot extends Component {
             {renderedSteps.map(this.renderStep)}
           </Content>
           <Footer className="rsc-footer" style={footerStyle}>
-            {!currentStep.hideInput && (
+            {!currentStep.hideInput && !disabled && (
               <Input
                 type="textarea"
                 style={inputStyle}
