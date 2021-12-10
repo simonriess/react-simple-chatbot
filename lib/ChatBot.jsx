@@ -53,7 +53,8 @@ function focusInput(targetInput) {
   // focus so that subsequent async focus will work
   //   fakeInput.focus();
   targetInput.focus();
-  scrollBackground();
+  targetInput.scrollIntoView();
+  //   scrollBackground();
   //   targetInput.click();
 
   setTimeout(() => {
