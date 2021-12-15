@@ -48,7 +48,7 @@ function focusInput(targetInput) {
 
   // you may need to append to another element depending on the browser's auto
   // zoom/scroll behavior
-  document.body.prepend(fakeInput);
+  //   document.body.prepend(fakeInput);
 
   // focus so that subsequent async focus will work
   //   fakeInput.focus();
